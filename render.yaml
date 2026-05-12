@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: smart-budget-allocator-api
+    env: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: ./start.sh
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: DATABASE_URL
+        value: sqlite:///./smart_budget.db
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: GOOGLE_SHEETS_ENABLED
+        value: "false"

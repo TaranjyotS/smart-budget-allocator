@@ -1,0 +1,27 @@
+__pycache__/
+*.pyc
+.env.local
+venv/
+node_modules/
+dist/
+smart_budget.db
+google_service_account.json
+.DS_Store
+
+# Frontend build/cache
+frontend/dist/
+frontend/node_modules/
+frontend/.env.local
+frontend/.env.production
+frontend/.vercel/
+
+# Backend runtime files
+backend/smart_budget.db
+backend/.env
+backend/__pycache__/
+backend/app/**/__pycache__/
+backend/tests/**/__pycache__/
+
+# Local deployment/runtime
+.vercel/
+*.log

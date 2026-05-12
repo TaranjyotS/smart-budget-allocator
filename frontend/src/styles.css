@@ -1,0 +1,988 @@
+:root {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f7f8fb;
+  color: #172033;
+}
+
+body {
+  margin: 0;
+}
+
+.app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 28px;
+}
+
+.hero {
+  background: linear-gradient(135deg, #111827, #334155);
+  color: white;
+  border-radius: 28px;
+  padding: 36px;
+  margin-bottom: 22px;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.18);
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(32px, 5vw, 56px);
+}
+
+.hero p {
+  max-width: 760px;
+  color: #dbeafe;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 13px;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+button {
+  border: none;
+  border-radius: 14px;
+  padding: 11px 16px;
+  background: #111827;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+button.active {
+  background: #2563eb;
+}
+
+button.danger {
+  background: #dc2626;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.card {
+  background: white;
+  border-radius: 24px;
+  padding: 22px;
+  box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+  overflow-x: auto;
+}
+
+.metric span {
+  color: #64748b;
+  font-weight: 700;
+}
+
+.metric strong {
+  display: block;
+  font-size: 32px;
+  margin-top: 8px;
+}
+
+.wide {
+  grid-column: span 2;
+}
+
+.chart {
+  height: 360px;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.form-wide {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+input, select {
+  border: 1px solid #d1d5db;
+  border-radius: 14px;
+  padding: 10px 12px;
+  font: inherit;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+}
+
+th, td {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 12px;
+  text-align: left;
+}
+
+.muted {
+  color: #64748b;
+}
+
+.error {
+  background: #fee2e2;
+  color: #991b1b;
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 16px;
+}
+
+.success {
+  background: #dcfce7;
+  color: #166534;
+  border-radius: 16px;
+  padding: 14px;
+  margin-top: 16px;
+}
+
+.status {
+  background: #f8fafc;
+  border-radius: 18px;
+  padding: 16px;
+  margin: 18px 0;
+}
+
+.progress {
+  width: 140px;
+  background: #e5e7eb;
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.progress span {
+  display: block;
+  height: 100%;
+  background: #2563eb;
+}
+
+pre {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 18px;
+  border-radius: 18px;
+  overflow-x: auto;
+}
+
+@media (max-width: 900px) {
+  .grid, .form, .form-wide {
+    grid-template-columns: 1fr;
+  }
+
+  .wide {
+    grid-column: span 1;
+  }
+}
+
+.filters {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 16px 0;
+  padding: 14px;
+  border-radius: 18px;
+  background: #f8fafc;
+}
+
+.filters select {
+  min-width: 180px;
+}
+
+.timeline-form {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: end;
+}
+
+.timeline-form label {
+  display: grid;
+  gap: 8px;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.mini-stat {
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 14px;
+  background: #f8fafc;
+}
+
+.mini-stat span {
+  display: block;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.mini-stat strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 22px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 800;
+  background: #e2e8f0;
+  color: #334155;
+}
+
+.pill.fixed-expenses { background: #dbeafe; color: #1e40af; }
+.pill.non-fixed-expenses { background: #fed7aa; color: #9a3412; }
+.pill.monthly-memberships { background: #ede9fe; color: #5b21b6; }
+.pill.yearly-memberships { background: #dcfce7; color: #166534; }
+.pill.investments { background: #cffafe; color: #155e75; }
+.pill.savings { background: #fef9c3; color: #854d0e; }
+
+.allocator-layout {
+  display: grid;
+  gap: 18px;
+}
+
+.wide-full {
+  width: auto;
+}
+
+.allocation-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.allocation-card {
+  position: relative;
+  padding-top: 48px;
+}
+
+.recommended-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: inline-flex !important;
+  border-radius: 999px;
+  padding: 5px 10px;
+  background: #dcfce7;
+  color: #166534 !important;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+ul.muted li {
+  margin-bottom: 8px;
+}
+
+@media (max-width: 900px) {
+  .timeline-form, .allocation-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Dashboard polish updates */
+.dashboard-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: flex-start;
+}
+.section-heading h2 { margin-bottom: 6px; }
+.timeline-pill {
+  white-space: nowrap;
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: #eef2ff;
+  color: #3730a3;
+  font-weight: 900;
+}
+.timeline-card {
+  overflow: visible;
+}
+.timeline-panel {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+  margin-top: 18px;
+}
+.timeline-panel label {
+  display: grid;
+  gap: 8px;
+  color: #64748b;
+  font-weight: 800;
+}
+.note {
+  margin-top: 18px;
+  border-radius: 20px;
+  padding: 16px 18px;
+  line-height: 1.55;
+}
+.warning-note {
+  background: #fff7ed;
+  color: #9a3412;
+  border: 1px solid #fed7aa;
+}
+.success-note {
+  background: #ecfdf5;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+.dashboard-charts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.compact-chart {
+  height: 340px;
+}
+.list-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.total-badge {
+  border-radius: 18px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  padding: 12px 16px;
+  min-width: 210px;
+}
+.total-badge span {
+  display: block;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 800;
+}
+.total-badge strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 24px;
+  color: #0f172a;
+}
+@media (max-width: 1100px) {
+  .dashboard-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .timeline-panel, .dashboard-charts { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .dashboard-grid { grid-template-columns: 1fr; }
+  .section-heading { flex-direction: column; }
+  .timeline-pill { white-space: normal; }
+}
+
+/* Dashboard layout fix: keep planner and charts full-width instead of squeezed into metric columns */
+.dashboard-grid > .wide-full {
+  grid-column: 1 / -1;
+}
+
+.dashboard-grid > .metric {
+  min-width: 0;
+}
+
+.timeline-card {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.timeline-panel {
+  grid-template-columns: repeat(5, minmax(160px, 1fr));
+}
+
+.timeline-panel input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dashboard-charts {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dashboard-charts > .card {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.dashboard-charts .recharts-wrapper,
+.dashboard-charts .recharts-responsive-container {
+  max-width: 100%;
+}
+
+@media (max-width: 1180px) {
+  .timeline-panel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .timeline-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tax & Registered Accounts Planner */
+.tax-layout {
+  display: grid;
+  gap: 18px;
+}
+.tax-hero-card {
+  overflow: visible;
+}
+.tax-disclaimer {
+  margin-top: 18px;
+  border-radius: 18px;
+  padding: 16px 18px;
+  line-height: 1.55;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  color: #9a3412;
+}
+.tax-grid-two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.tax-form {
+  grid-template-columns: 1.1fr 0.8fr 0.8fr 1.2fr 0.8fr;
+}
+.compact-label {
+  display: grid;
+  gap: 8px;
+  min-width: 220px;
+  color: #64748b;
+  font-weight: 800;
+}
+.registered-room-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+.registered-room-grid label {
+  display: grid;
+  gap: 8px;
+  color: #64748b;
+  font-weight: 800;
+}
+.account-room-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.suggestion-list li {
+  margin-bottom: 10px;
+}
+@media (max-width: 1100px) {
+  .tax-grid-two, .tax-form, .registered-room-grid, .account-room-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Professional header and Tax Planner layout refinements */
+.hero-polished {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 48px 36px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-polished::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(96, 165, 250, 0.22), transparent 32%),
+    radial-gradient(circle at 80% 10%, rgba(45, 212, 191, 0.14), transparent 28%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #bfdbfe;
+  margin: 0 auto 16px;
+  backdrop-filter: blur(8px);
+}
+
+.hero-subtitle {
+  max-width: none !important;
+  margin: 18px auto 0;
+  font-size: 18px;
+  color: #e0f2fe !important;
+}
+
+.tax-subtitle {
+  white-space: nowrap;
+  max-width: none;
+}
+
+.tax-income-card,
+.tax-breakdown-card {
+  overflow: visible;
+}
+
+.tax-income-card table {
+  table-layout: auto;
+}
+
+.no-scroll-table {
+  width: 100%;
+  overflow-x: visible;
+}
+
+.tax-form {
+  grid-template-columns: 1.3fr 0.9fr 0.75fr 1.25fr 0.75fr;
+  align-items: stretch;
+}
+
+.tax-breakdown-card .compact-chart {
+  height: 420px;
+}
+
+.paired-room-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: end;
+}
+
+@media (max-width: 1200px) {
+  .tax-subtitle {
+    white-space: normal;
+  }
+
+  .tax-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tax-form button {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero-polished {
+    padding: 34px 22px;
+  }
+
+  .hero-subtitle {
+    font-size: 16px;
+  }
+
+  .tax-form,
+  .paired-room-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Final header and Tax Planner refinements */
+.hero-title {
+  white-space: nowrap;
+  font-size: clamp(38px, 4.6vw, 60px) !important;
+}
+
+.metric-detail {
+  display: block;
+  margin-top: 8px;
+  color: #64748b;
+  font-style: normal;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.tax-form {
+  grid-template-columns: 1.15fr 0.75fr 0.7fr 0.62fr 0.72fr 1fr 1.15fr 0.75fr;
+  align-items: stretch;
+}
+
+.tax-income-card th,
+.tax-income-card td {
+  white-space: normal;
+  vertical-align: middle;
+}
+
+.tax-income-card table th:last-child,
+.tax-income-card table td:last-child {
+  width: 120px;
+}
+
+@media (max-width: 1180px) {
+  .hero-title {
+    white-space: normal;
+  }
+
+  .tax-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tax-form button {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 700px) {
+  .tax-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Final Tax Planner width and header alignment fixes */
+.app,
+.hero,
+.tabs,
+.tax-layout,
+.tax-layout .card {
+  box-sizing: border-box;
+}
+
+.hero-polished {
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+}
+
+.hero-content {
+  width: 100%;
+  max-width: 1120px;
+  text-align: center;
+}
+
+.hero-title {
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+  font-size: clamp(36px, 4.1vw, 58px) !important;
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+}
+
+.hero-eyebrow,
+.hero-subtitle {
+  text-align: center;
+}
+
+.tax-layout {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.tax-layout > .card,
+.tax-layout > .grid,
+.tax-layout > .tax-grid-two {
+  width: 100%;
+  max-width: 100%;
+}
+
+.metric-detail span {
+  display: block;
+}
+
+.tax-form {
+  display: grid;
+  grid-template-columns: minmax(160px, 1.35fr) minmax(120px, 0.8fr) minmax(130px, 0.75fr) minmax(95px, 0.55fr) minmax(115px, 0.65fr) minmax(150px, 0.85fr) minmax(180px, 1fr) minmax(120px, 0.65fr);
+  gap: 12px;
+  width: 100%;
+}
+
+.tax-form input,
+.tax-form select,
+.tax-form button {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.tax-income-card {
+  overflow-x: hidden;
+}
+
+.tax-income-card .table-wrap {
+  overflow-x: auto;
+}
+
+.tax-income-card table {
+  min-width: 960px;
+}
+
+.tax-income-card th,
+.tax-income-card td {
+  padding: 12px 10px;
+}
+
+@media (max-width: 1320px) {
+  .hero-title {
+    font-size: clamp(34px, 3.7vw, 50px) !important;
+  }
+}
+
+@media (max-width: 1180px) {
+  .hero-title {
+    white-space: normal;
+  }
+
+  .tax-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tax-form button {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 720px) {
+  .tax-form {
+    grid-template-columns: 1fr;
+  }
+
+  .tax-income-card table {
+    min-width: 880px;
+  }
+}
+
+/* Inline table editing controls */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.edit-button {
+  background: #2563eb;
+}
+
+.success-button {
+  background: #16a34a;
+}
+
+.secondary {
+  background: #64748b;
+}
+
+td input,
+td select {
+  width: 100%;
+  min-width: 110px;
+  box-sizing: border-box;
+}
+
+.inline-edit-pair {
+  display: grid;
+  grid-template-columns: minmax(70px, 0.7fr) minmax(95px, 1fr);
+  gap: 8px;
+}
+
+/* Deployment-ready responsive refinements */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.app {
+  width: 100%;
+}
+
+.tabs {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(247, 248, 251, 0.94);
+  backdrop-filter: blur(10px);
+  padding: 10px 0;
+}
+
+.tabs button {
+  min-height: 42px;
+}
+
+.card,
+.hero,
+.tax-layout,
+.dashboard-grid,
+.dashboard-charts,
+.allocation-grid {
+  max-width: 100%;
+}
+
+.card {
+  overflow-wrap: anywhere;
+}
+
+.table-wrap,
+.card:has(table) {
+  -webkit-overflow-scrolling: touch;
+}
+
+img,
+svg,
+canvas {
+  max-width: 100%;
+}
+
+@media (max-width: 980px) {
+  .app {
+    padding: 20px;
+  }
+
+  .hero-polished {
+    padding: 34px 24px;
+  }
+
+  .hero-title {
+    white-space: normal !important;
+    font-size: clamp(30px, 8vw, 44px) !important;
+  }
+
+  .hero-subtitle {
+    font-size: 16px;
+  }
+
+  .tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    scrollbar-width: thin;
+  }
+
+  .tabs button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .grid,
+  .dashboard-grid,
+  .dashboard-charts,
+  .tax-grid-two,
+  .allocation-grid,
+  .account-room-cards,
+  .registered-room-grid,
+  .paired-room-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .wide,
+  .wide-full {
+    grid-column: 1 / -1;
+  }
+
+  .chart,
+  .compact-chart {
+    height: 300px;
+  }
+}
+
+@media (max-width: 640px) {
+  .app {
+    padding: 14px;
+  }
+
+  .hero {
+    border-radius: 22px;
+    margin-bottom: 16px;
+  }
+
+  .hero-polished {
+    padding: 28px 18px;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+
+  .hero-title {
+    font-size: clamp(26px, 9vw, 36px) !important;
+    line-height: 1.15;
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .card {
+    border-radius: 20px;
+    padding: 16px;
+  }
+
+  .metric strong,
+  .total-badge strong {
+    font-size: 24px;
+  }
+
+  .form,
+  .form-wide,
+  .timeline-form,
+  .timeline-panel,
+  .tax-form {
+    grid-template-columns: 1fr !important;
+  }
+
+  input,
+  select,
+  button {
+    min-height: 44px;
+  }
+
+  th,
+  td {
+    padding: 10px 8px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .action-buttons button {
+    width: 100%;
+  }
+
+  .chart,
+  .compact-chart {
+    height: 260px;
+  }
+}

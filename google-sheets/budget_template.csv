@@ -1,0 +1,10 @@
+type,name,category,amount,frequency,due_date,notes
+income,Monthly Salary,Salary,3600,monthly,,
+expense,Mortgage/Rent,Fixed Expenses,900,monthly,1st of each month,
+expense,Phone Bill,Fixed Expenses,113,monthly,5th of each month,
+expense,Car Insurance,Fixed Expenses,160,monthly,21st of each month,
+expense,Groceries,Fixed Expenses,600,monthly,,
+expense,Dining Out,Non-Fixed Expenses,250,monthly,,
+expense,Shopping,Non-Fixed Expenses,300,monthly,,
+expense,Costco,Yearly Memberships,147,yearly,1st Dec each year,
+expense,Blossom,Yearly Memberships,60,yearly,11th May each year,
