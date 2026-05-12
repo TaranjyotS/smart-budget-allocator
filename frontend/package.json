@@ -16,8 +16,8 @@
     "recharts": "^2.15.0"
   },
   "devDependencies": {},
-  "packageManager": "pnpm@9.15.4",
   "engines": {
-    "node": "20.x"
+    "node": "20.x",
+    "npm": "10.x"
   }
 }
