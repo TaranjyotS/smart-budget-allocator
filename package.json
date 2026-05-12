@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "frontend:install": "cd frontend && npm install",
-    "frontend:build": "cd frontend && npm run build",
-    "frontend:dev": "cd frontend && npm run dev"
+    "frontend:install": "cd frontend && pnpm install --no-frozen-lockfile",
+    "frontend:build": "cd frontend && pnpm run build",
+    "frontend:dev": "cd frontend && pnpm run dev"
+  },
+  "packageManager": "pnpm@9.15.4",
+  "engines": {
+    "node": "20.x"
   }
 }

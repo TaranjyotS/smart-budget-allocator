@@ -147,3 +147,20 @@ If Vercel fails with `npm ci exited with 1`, either:
 2. Keep Root Directory as repo root and use the root `vercel.json` included in this project.
 
 This project now uses `npm install` instead of `npm ci` to avoid failing when the lockfile is missing or out of sync on GitHub.
+
+
+## Vercel npm internal error: `Exit handler never called`
+
+If Vercel fails during `npm install` with `Exit handler never called`, use the included pnpm-based Vercel config.
+
+Recommended Vercel settings:
+
+```text
+Root Directory: frontend
+Install Command: corepack enable && pnpm install --no-frozen-lockfile
+Build Command: pnpm run build
+Output Directory: dist
+Node.js Version: 20.x
+```
+
+If Vercel already has custom settings saved in the dashboard, dashboard settings can override `frontend/vercel.json`. Update the Vercel dashboard settings manually to match the above values, then redeploy.
