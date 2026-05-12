@@ -119,3 +119,31 @@ Or use:
 ```text
 start-app.bat
 ```
+
+## Deployment Troubleshooting Notes
+
+### Render pydantic-core / maturin / cargo error
+If Render shows an error involving `pydantic-core`, `maturin`, `cargo`, or Python `3.14`, make sure the backend service uses Python `3.11.9`.
+
+This project includes:
+
+- `.python-version`
+- `backend/.python-version`
+- `PYTHON_VERSION=3.11.9` in `render.yaml`
+
+In Render, also verify:
+
+```text
+Environment Variable: PYTHON_VERSION = 3.11.9
+Root Directory: backend
+Build Command: pip install --upgrade pip && pip install -r requirements.txt
+Start Command: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+```
+
+### Vercel npm ci error
+If Vercel fails with `npm ci exited with 1`, either:
+
+1. Set Root Directory to `frontend`, or
+2. Keep Root Directory as repo root and use the root `vercel.json` included in this project.
+
+This project now uses `npm install` instead of `npm ci` to avoid failing when the lockfile is missing or out of sync on GitHub.

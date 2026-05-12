@@ -1,0 +1,10 @@
+{
+  "name": "smart-budget-allocator",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "frontend:install": "cd frontend && npm install",
+    "frontend:build": "cd frontend && npm run build",
+    "frontend:dev": "cd frontend && npm run dev"
+  }
+}
