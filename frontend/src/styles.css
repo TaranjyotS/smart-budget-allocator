@@ -986,3 +986,26 @@ canvas {
     height: 260px;
   }
 }
+
+/* Asset goals action buttons: keep Save/Delete readable on one line on desktop */
+.no-wrap-actions {
+  flex-wrap: nowrap;
+  min-width: 180px;
+}
+
+.compact-action-button {
+  min-width: 78px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  .no-wrap-actions {
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+
+  .compact-action-button {
+    width: 100%;
+  }
+}

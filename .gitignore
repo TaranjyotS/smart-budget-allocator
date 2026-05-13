@@ -1,4 +1,4 @@
-# Environment files
+# Environment files - never commit real secrets
 .env
 .env.local
 .env.production
@@ -7,14 +7,19 @@ frontend/.env
 frontend/.env.local
 frontend/.env.production
 
-# Keep examples
+# Keep example env files
 !.env.example
 !*.env.example
 
-# Node
+# Node / frontend build artifacts
 node_modules/
 frontend/node_modules/
 frontend/dist/
+dist/
+# Remove lockfile for Vercel install stability in this project
+frontend/package-lock.json
+package-lock.json
+npm-debug.log*
 
 # Python
 __pycache__/
@@ -29,6 +34,8 @@ backend/.venv/
 *.sqlite
 *.sqlite3
 smart_budget.db
+backend/smart_budget.db
+logs/
 
 # OS / editor
 .DS_Store

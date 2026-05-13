@@ -39,7 +39,7 @@ export default function Goals({ assets, refresh }) {
       </form>
 
       <table>
-        <thead><tr><th>Account</th><th>Current Balance</th><th>Target</th><th>Priority</th><th>Progress</th><th></th><th></th></tr></thead>
+        <thead><tr><th>Account</th><th>Current Balance</th><th>Target</th><th>Priority</th><th>Progress</th><th>Actions</th></tr></thead>
         <tbody>
           {assets.map(asset => {
             const current = editing[asset.id] || {};
@@ -53,8 +53,12 @@ export default function Goals({ assets, refresh }) {
                 <td><input type="number" value={current.target ?? asset.target} onChange={e => updateLocal(asset.id, "target", e.target.value)} /></td>
                 <td><input type="number" value={current.priority ?? asset.priority} onChange={e => updateLocal(asset.id, "priority", e.target.value)} /></td>
                 <td><div className="progress"><span style={{ width: `${pct}%` }}></span></div>{pct}%</td>
-                <td><button onClick={() => save(asset)}>Save</button></td>
-                <td><button className="danger" onClick={async () => { await api.deleteAsset(asset.id); refresh(); }}>Delete</button></td>
+                <td>
+                  <div className="action-buttons no-wrap-actions">
+                    <button className="success-button compact-action-button" onClick={() => save(asset)}>Save</button>
+                    <button className="danger compact-action-button" onClick={async () => { await api.deleteAsset(asset.id); refresh(); }}>Delete</button>
+                  </div>
+                </td>
               </tr>
             );
           })}
