@@ -7,7 +7,9 @@ def monthly_value(amount: float, frequency: str) -> float:
     if frequency == "weekly":
         return amount * 52 / 12
     if frequency in {"biweekly", "bi-weekly"}:
-        return amount * 26 / 12
+        # Budgeting view treats each bi-weekly income row as one regular paycheck.
+        # Two default $1,800 paycheck rows therefore equal $3,600/month.
+        return amount
     if frequency == "yearly":
         return amount / 12
     if frequency == "one-time":

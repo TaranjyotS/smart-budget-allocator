@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 const PROVINCE_TAX = {
@@ -126,7 +126,13 @@ function normalizeIncomeAmount(amount, frequency, durationValue = 12, durationUn
 }
 
 function formatDuration(value, unit) {
-  return `${Number(value || 0)} ${unit}`;
+  const label = String(unit || "months").charAt(0).toUpperCase() + String(unit || "months").slice(1);
+  return `${Number(value || 0)} ${label}`;
+}
+
+function frequencyLabel(value) {
+  const map = { hourly: "Hourly", weekly: "Weekly", "bi-weekly": "Bi-weekly", monthly: "Monthly", yearly: "Yearly", "one-time": "One-time" };
+  return map[value] || value;
 }
 
 function marginalRate(income, province) {
@@ -148,7 +154,7 @@ function employmentCost(annualIncome, type) {
   return { cpp: 0, ei: 0, label: "Corporate/personal split estimate" };
 }
 
-export default function TaxPlanner() {
+export default function TaxPlanner({ expenses = [] }) {
   const [incomeSources, setIncomeSources] = useState([
     { id: 1, name: "Main income", amount: 55000, frequency: "yearly", type: "t4", durationValue: 12, durationUnit: "months", province: "Ontario" },
   ]);
@@ -156,12 +162,40 @@ export default function TaxPlanner() {
   const [editingIncomeId, setEditingIncomeId] = useState(null);
   const [editIncome, setEditIncome] = useState({ name: "", amount: "", frequency: "yearly", type: "t4", durationValue: 12, durationUnit: "months", province: "Ontario" });
   const [rooms, setRooms] = useState({ tfsa: 36000, fhsa: 8000, rrsp: 12000 });
-  const [contribs, setContribs] = useState({ tfsa: 0, fhsa: 0, rrsp: 0 });
+  const [contribs, setContribs] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("registeredAccountContributions") || "null") || { tfsa: 0, fhsa: 0, rrsp: 0 };
+    } catch {
+      return { tfsa: 0, fhsa: 0, rrsp: 0 };
+    }
+  });
+  const [chartPeriod, setChartPeriod] = useState("yearly");
+
+  useEffect(() => {
+    localStorage.setItem("registeredAccountContributions", JSON.stringify(contribs));
+  }, [contribs]);
+
+  const expenseContribs = useMemo(() => {
+    return expenses.reduce((acc, expense) => {
+      const text = `${expense.name || ""} ${expense.category || ""} ${expense.notes || ""}`.toLowerCase();
+      const amount = Number(expense.amount || 0);
+      if (text.includes("tfsa")) acc.tfsa += amount;
+      if (text.includes("fhsa")) acc.fhsa += amount;
+      if (text.includes("rrsp")) acc.rrsp += amount;
+      return acc;
+    }, { tfsa: 0, fhsa: 0, rrsp: 0 });
+  }, [expenses]);
+
+  const totalContribs = useMemo(() => ({
+    tfsa: Number(contribs.tfsa || 0) + Number(expenseContribs.tfsa || 0),
+    fhsa: Number(contribs.fhsa || 0) + Number(expenseContribs.fhsa || 0),
+    rrsp: Number(contribs.rrsp || 0) + Number(expenseContribs.rrsp || 0),
+  }), [contribs, expenseContribs]);
 
   const tax = useMemo(() => {
     const annualIncome = incomeSources.reduce((sum, item) => sum + normalizeIncomeAmount(item.amount, item.frequency, item.durationValue, item.durationUnit), 0);
-    const rrspDeduction = Math.min(Number(contribs.rrsp || 0), Number(rooms.rrsp || 0), ACCOUNT_LIMITS_2026.rrspDollarLimit);
-    const fhsaDeduction = Math.min(Number(contribs.fhsa || 0), Number(rooms.fhsa || 0), ACCOUNT_LIMITS_2026.fhsaAnnual);
+    const rrspDeduction = Math.min(Number(totalContribs.rrsp || 0), Number(rooms.rrsp || 0), ACCOUNT_LIMITS_2026.rrspDollarLimit);
+    const fhsaDeduction = Math.min(Number(totalContribs.fhsa || 0), Number(rooms.fhsa || 0), ACCOUNT_LIMITS_2026.fhsaAnnual);
     const taxableIncome = Math.max(0, annualIncome - rrspDeduction - fhsaDeduction);
     const federalTax = calculateBracketTax(taxableIncome, FEDERAL_TAX);
     const provincialTax = incomeSources.reduce((sum, item) => {
@@ -178,22 +212,23 @@ export default function TaxPlanner() {
       return acc;
     }, { cpp: 0, ei: 0 });
     const totalTax = federalTax + provincialTax + payroll.cpp + payroll.ei;
-    const netAnnual = Math.max(0, annualIncome - totalTax - Number(contribs.tfsa || 0) - Number(contribs.rrsp || 0) - Number(contribs.fhsa || 0));
+    const netAnnual = Math.max(0, annualIncome - totalTax - Number(totalContribs.tfsa || 0) - Number(totalContribs.rrsp || 0) - Number(totalContribs.fhsa || 0));
     const primaryProvince = incomeSources[0]?.province || "Ontario";
     const rate = marginalRate(annualIncome, primaryProvince);
     const rrspSavings = rrspDeduction * rate;
     const fhsaSavings = fhsaDeduction * rate;
-    const tfsaLeft = Math.max(0, Number(rooms.tfsa || 0) - Number(contribs.tfsa || 0));
-    const fhsaLeft = Math.max(0, Number(rooms.fhsa || 0) - Number(contribs.fhsa || 0));
-    const rrspLeft = Math.max(0, Number(rooms.rrsp || 0) - Number(contribs.rrsp || 0));
+    const tfsaLeft = Math.max(0, Number(rooms.tfsa || 0) - Number(totalContribs.tfsa || 0));
+    const fhsaLeft = Math.max(0, Number(rooms.fhsa || 0) - Number(totalContribs.fhsa || 0));
+    const rrspLeft = Math.max(0, Number(rooms.rrsp || 0) - Number(totalContribs.rrsp || 0));
     return { annualIncome, taxableIncome, federalTax, provincialTax, totalTax, payroll, netAnnual, rate, rrspSavings, fhsaSavings, tfsaLeft, fhsaLeft, rrspLeft };
-  }, [incomeSources, rooms, contribs]);
+  }, [incomeSources, rooms, totalContribs]);
 
+  const periodDivisor = chartPeriod === "monthly" ? 12 : chartPeriod === "bi-weekly" ? 26 : 1;
   const chartData = [
-    { name: "Federal tax", value: Math.round(tax.federalTax) },
-    { name: "Provincial tax", value: Math.round(tax.provincialTax) },
-    { name: "CPP/EI", value: Math.round(tax.payroll.cpp + tax.payroll.ei) },
-    { name: "Estimated net", value: Math.round(tax.netAnnual) },
+    { name: "Federal tax", value: Math.round(tax.federalTax / periodDivisor) },
+    { name: "Provincial tax", value: Math.round(tax.provincialTax / periodDivisor) },
+    { name: "CPP/EI", value: Math.round((tax.payroll.cpp + tax.payroll.ei) / periodDivisor) },
+    { name: "Estimated net", value: Math.round(tax.netAnnual / periodDivisor) },
   ];
 
   const addIncome = () => {
@@ -230,12 +265,12 @@ export default function TaxPlanner() {
 
   const priority = useMemo(() => {
     const items = [];
-    if (Number(rooms.fhsa || 0) > Number(contribs.fhsa || 0)) items.push("FHSA: strong priority if you are eligible and planning to buy a first home in Canada.");
-    if (Number(rooms.rrsp || 0) > Number(contribs.rrsp || 0)) items.push("RRSP: useful when your income is high enough that the deduction meaningfully lowers taxes.");
-    if (Number(rooms.tfsa || 0) > Number(contribs.tfsa || 0)) items.push("TFSA: flexible tax-free investing and usually best for long-term growth after emergency savings.");
+    if (Number(rooms.fhsa || 0) > Number(totalContribs.fhsa || 0)) items.push("FHSA: strong priority if you are eligible and planning to buy a first home in Canada.");
+    if (Number(rooms.rrsp || 0) > Number(totalContribs.rrsp || 0)) items.push("RRSP: useful when your income is high enough that the deduction meaningfully lowers taxes.");
+    if (Number(rooms.tfsa || 0) > Number(totalContribs.tfsa || 0)) items.push("TFSA: flexible tax-free investing and usually best for long-term growth after emergency savings.");
     if (!items.length) items.push("All entered contribution rooms appear fully used. Review CRA My Account before adding more.");
     return items;
-  }, [rooms, contribs]);
+  }, [rooms, totalContribs]);
 
   return (
     <section className="tax-layout">
@@ -272,19 +307,19 @@ export default function TaxPlanner() {
           <input placeholder="Income name" value={newIncome.name} onChange={e => setNewIncome({ ...newIncome, name: e.target.value })} />
           <input type="number" placeholder="Amount" value={newIncome.amount} onChange={e => setNewIncome({ ...newIncome, amount: e.target.value })} />
           <select value={newIncome.frequency} onChange={e => setNewIncome({ ...newIncome, frequency: e.target.value })}>
-            <option value="hourly">hourly</option>
-            <option value="weekly">weekly</option>
-            <option value="bi-weekly">bi-weekly</option>
-            <option value="monthly">monthly</option>
-            <option value="yearly">yearly</option>
-            <option value="one-time">one-time</option>
+            <option value="hourly">Hourly</option>
+            <option value="weekly">Weekly</option>
+            <option value="bi-weekly">Bi-weekly</option>
+            <option value="monthly">Monthly</option>
+            <option value="yearly">Yearly</option>
+            <option value="one-time">One-time</option>
           </select>
           <input type="number" placeholder="Duration" value={newIncome.durationValue} onChange={e => setNewIncome({ ...newIncome, durationValue: e.target.value })} />
           <select value={newIncome.durationUnit} onChange={e => setNewIncome({ ...newIncome, durationUnit: e.target.value })}>
-            <option value="days">days</option>
-            <option value="weeks">weeks</option>
-            <option value="months">months</option>
-            <option value="years">years</option>
+            <option value="days">Days</option>
+            <option value="weeks">Weeks</option>
+            <option value="months">Months</option>
+            <option value="years">Years</option>
           </select>
           <select value={newIncome.province} onChange={e => setNewIncome({ ...newIncome, province: e.target.value })}>
             {Object.keys(PROVINCE_TAX).map(p => <option key={p}>{p}</option>)}
@@ -310,22 +345,22 @@ export default function TaxPlanner() {
                     <td>{isEditing ? <input type="number" value={editIncome.amount} onChange={e => setEditIncome({ ...editIncome, amount: e.target.value })} /> : currency(item.amount)}</td>
                     <td>{isEditing ? (
                       <select value={editIncome.frequency} onChange={e => setEditIncome({ ...editIncome, frequency: e.target.value })}>
-                        <option value="hourly">hourly</option>
-                        <option value="weekly">weekly</option>
-                        <option value="bi-weekly">bi-weekly</option>
-                        <option value="monthly">monthly</option>
-                        <option value="yearly">yearly</option>
-                        <option value="one-time">one-time</option>
+                        <option value="hourly">Hourly</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="bi-weekly">Bi-weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="yearly">Yearly</option>
+                        <option value="one-time">One-time</option>
                       </select>
-                    ) : item.frequency}</td>
+                    ) : frequencyLabel(item.frequency)}</td>
                     <td>{isEditing ? (
                       <div className="inline-edit-pair">
                         <input type="number" value={editIncome.durationValue} onChange={e => setEditIncome({ ...editIncome, durationValue: e.target.value })} />
                         <select value={editIncome.durationUnit} onChange={e => setEditIncome({ ...editIncome, durationUnit: e.target.value })}>
-                          <option value="days">days</option>
-                          <option value="weeks">weeks</option>
-                          <option value="months">months</option>
-                          <option value="years">years</option>
+                          <option value="days">Days</option>
+                          <option value="weeks">Weeks</option>
+                          <option value="months">Months</option>
+                          <option value="years">Years</option>
                         </select>
                       </div>
                     ) : formatDuration(item.durationValue, item.durationUnit)}</td>
@@ -349,9 +384,9 @@ export default function TaxPlanner() {
                           <button className="secondary" type="button" onClick={cancelIncomeEdit}>Cancel</button>
                         </div>
                       ) : (
-                        <div className="action-buttons">
-                          <button className="edit-button" type="button" onClick={() => startIncomeEdit(item)}>Edit</button>
-                          <button className="danger" type="button" onClick={() => setIncomeSources(incomeSources.filter(x => x.id !== item.id))}>Delete</button>
+                        <div className="action-buttons tax-inline-actions">
+                          <button className="edit-button compact-action-button" type="button" onClick={() => startIncomeEdit(item)}>Edit</button>
+                          <button className="danger compact-action-button" type="button" onClick={() => setIncomeSources(incomeSources.filter(x => x.id !== item.id))}>Delete</button>
                         </div>
                       )}
                     </td>
@@ -364,7 +399,17 @@ export default function TaxPlanner() {
       </div>
 
       <div className="card wide-full tax-breakdown-card">
-        <h2>Tax Estimate Breakdown</h2>
+        <div className="section-heading">
+          <div>
+            <h2>Tax Estimate Breakdown</h2>
+            <p className="muted">Switch between Yearly, Monthly, and Bi-weekly estimates.</p>
+          </div>
+          <select className="period-select" value={chartPeriod} onChange={e => setChartPeriod(e.target.value)}>
+            <option value="yearly">Yearly</option>
+            <option value="monthly">Monthly</option>
+            <option value="bi-weekly">Bi-weekly</option>
+          </select>
+        </div>
         <div className="chart compact-chart">
           <ResponsiveContainer>
             <BarChart data={chartData}>
@@ -382,7 +427,7 @@ export default function TaxPlanner() {
       <div className="tax-grid-two">
         <div className="card">
           <h2>CRA Contribution Room</h2>
-          <p className="muted">Enter the exact room from CRA My Account/NOA. The app does not assume your personal room.</p>
+          <p className="muted">Enter the exact room from CRA My Account/NOA. The app also includes TFSA/FHSA/RRSP investment entries from the Expense tab.</p>
           <div className="registered-room-grid paired-room-grid">
             <label>TFSA available room<input type="number" value={rooms.tfsa} onChange={e => setRooms({ ...rooms, tfsa: Number(e.target.value) })} /></label>
             <label>Current TFSA contribution<input type="number" value={contribs.tfsa} onChange={e => setContribs({ ...contribs, tfsa: Number(e.target.value) })} /></label>
@@ -395,12 +440,13 @@ export default function TaxPlanner() {
 
         <div className="card">
           <h2>Registered Account Summary</h2>
-          <div className="account-room-cards">
+          <div className="account-room-cards account-room-pairs">
             <div className="mini-stat"><span>TFSA room left</span><strong>{currency(tax.tfsaLeft)}</strong></div>
+            <div className="mini-stat"><span>TFSA estimated tax savings</span><strong>$0</strong></div>
             <div className="mini-stat"><span>FHSA room left</span><strong>{currency(tax.fhsaLeft)}</strong></div>
+            <div className="mini-stat"><span>Estimated FHSA savings</span><strong>{currency(tax.fhsaSavings)}</strong></div>
             <div className="mini-stat"><span>RRSP room left</span><strong>{currency(tax.rrspLeft)}</strong></div>
             <div className="mini-stat"><span>Estimated RRSP savings</span><strong>{currency(tax.rrspSavings)}</strong></div>
-            <div className="mini-stat"><span>Estimated FHSA savings</span><strong>{currency(tax.fhsaSavings)}</strong></div>
           </div>
         </div>
       </div>

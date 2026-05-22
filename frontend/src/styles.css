@@ -1009,3 +1009,483 @@ canvas {
     width: 100%;
   }
 }
+
+/* Monthly logs and final finance workflow refinements */
+.allocation-summary-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.surplus-badge {
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+
+.period-select {
+  min-width: 160px;
+}
+
+.account-room-pairs {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.tax-inline-actions {
+  flex-wrap: nowrap;
+  gap: 6px;
+}
+
+.tax-inline-actions .compact-action-button {
+  min-width: 68px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.monthly-logs-card {
+  overflow: hidden;
+}
+
+.monthly-log-wrap {
+  width: 100%;
+  overflow: auto;
+  margin-top: 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+}
+
+.monthly-log-table {
+  min-width: 1400px;
+  margin-top: 0;
+}
+
+.monthly-log-table th {
+  background: #f3b1b1;
+  color: #111827;
+  font-size: 12px;
+  white-space: nowrap;
+  border-bottom: 1px solid #111827;
+}
+
+.monthly-log-table td {
+  padding: 7px 8px;
+  vertical-align: top;
+  border: 1px solid #e5e7eb;
+  font-size: 13px;
+}
+
+.monthly-log-table input {
+  width: 110px;
+  min-width: 90px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.sticky-col {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: #fee2e2 !important;
+  font-weight: 800;
+}
+
+.month-cell {
+  white-space: nowrap;
+}
+
+.log-cell-wrap {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.note-button {
+  min-height: 28px;
+  padding: 5px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  background: #475569;
+}
+
+.cell-note {
+  width: 180px;
+  min-height: 64px;
+  margin-top: 6px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 8px;
+  font-family: inherit;
+}
+
+.log-income {
+  color: #15803d;
+  font-weight: 800;
+}
+
+.log-expense,
+.log-total-expense {
+  color: #dc2626;
+  font-weight: 800;
+}
+
+.log-zero {
+  color: #2563eb;
+  font-weight: 800;
+}
+
+@media (max-width: 900px) {
+  .allocation-summary-card {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .surplus-badge {
+    margin-left: 0;
+  }
+
+  .tax-inline-actions {
+    flex-wrap: wrap;
+  }
+}
+
+.expense-total-badge {
+  min-width: 260px;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.expense-total-badge small {
+  display: block;
+  color: #64748b;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.target-input-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
+  margin-top: 2px;
+}
+
+.target-input-label input {
+  width: 84px;
+  min-height: 30px;
+  padding: 4px 8px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.monthly-logs-header {
+  align-items: flex-end;
+}
+
+.year-selector {
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.year-selector label {
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.year-selector select {
+  min-height: 48px;
+  border-radius: 16px;
+  border: 1px solid #d0d7e2;
+  padding: 0 14px;
+  font-weight: 800;
+  background: #f8fafc;
+}
+
+@media (max-width: 760px) {
+  .expense-total-badge {
+    min-width: 100%;
+  }
+
+  .target-input-label {
+    flex-wrap: wrap;
+  }
+
+  .monthly-logs-header {
+    align-items: stretch;
+  }
+
+  .year-selector {
+    min-width: 100%;
+  }
+}
+
+/* Latest polish: income table spacing, expense target badge, and logs year selector */
+.income-streams-card table {
+  table-layout: fixed;
+}
+
+.income-streams-card th,
+.income-streams-card td {
+  width: 25%;
+}
+
+.income-streams-card .action-buttons {
+  justify-content: flex-start;
+}
+
+.expense-total-badge {
+  min-width: 250px;
+  gap: 2px;
+  padding: 14px 16px;
+}
+
+.expense-total-badge span {
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.expense-total-badge strong {
+  font-size: 26px;
+  line-height: 1.1;
+}
+
+.expense-total-badge small {
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.target-input-label {
+  font-size: 11px;
+  line-height: 1.2;
+  gap: 5px;
+}
+
+.money-input-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  background: #fff;
+  padding-left: 8px;
+}
+
+.money-prefix {
+  color: #475569;
+  font-size: 11px !important;
+  font-weight: 900;
+}
+
+.target-input-label .money-input-wrap input {
+  border: 0;
+  width: 74px;
+  min-height: 28px;
+  padding: 3px 7px 3px 2px;
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.target-warning {
+  margin: 2px 0 0;
+  color: #dc2626;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.year-selector select {
+  max-height: 180px;
+}
+
+/* Final expense target card and monthly log year dropdown fixes */
+.expense-total-badge {
+  width: 300px;
+  min-width: 300px;
+  min-height: 156px;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+.expense-total-badge strong {
+  font-size: 25px;
+}
+
+.target-input-label {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 8px;
+  margin-top: 4px;
+}
+
+.target-money-field {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+}
+
+.target-money-field .money-prefix {
+  flex: 0 0 auto;
+  color: #475569;
+  font-size: 11px !important;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.target-input-label .target-money-field input {
+  width: 82px;
+  min-height: 28px;
+  padding: 3px 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.target-warning {
+  min-height: 26px;
+  max-width: 100%;
+  margin: 4px 0 0;
+  color: #dc2626;
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.target-warning.hidden {
+  visibility: hidden;
+}
+
+.year-dropdown {
+  position: relative;
+}
+
+.year-dropdown-button {
+  width: 100%;
+  min-height: 48px;
+  border-radius: 16px;
+  border: 1px solid #d0d7e2;
+  padding: 0 14px;
+  font-weight: 800;
+  background: #f8fafc;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.year-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 50;
+  width: 100%;
+  max-height: 210px;
+  overflow-y: auto;
+  border: 1px solid #cbd5e1;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
+}
+
+.year-dropdown-menu button {
+  width: 100%;
+  height: 42px;
+  border: 0;
+  border-radius: 0;
+  padding: 0 14px;
+  background: #fff;
+  color: #0f172a;
+  text-align: left;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.year-dropdown-menu button:hover,
+.year-dropdown-menu button.selected {
+  background: #e8eefc;
+  color: #1d4ed8;
+}
+
+/* Final compact expense target and year dropdown alignment fixes */
+.expense-total-badge {
+  min-height: 172px;
+  height: 172px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.expense-total-badge strong {
+  margin-bottom: 6px;
+}
+
+.expense-total-badge small {
+  margin-bottom: 6px;
+}
+
+.target-input-label {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 6px !important;
+  width: 100%;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+.target-input-label > span:first-child {
+  flex: 0 0 auto;
+}
+
+.target-money-field {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 4px !important;
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+.target-money-field .money-prefix {
+  display: inline-block;
+  flex: 0 0 auto;
+  line-height: 1;
+  margin: 0;
+  transform: none;
+}
+
+.target-input-label .target-money-field input {
+  width: 72px;
+  min-height: 27px;
+}
+
+.target-warning {
+  min-height: 32px;
+  display: block;
+  margin-top: 6px;
+}
+
+.year-selector label {
+  text-align: center;
+  width: 100%;
+}
+
+.year-dropdown-menu {
+  max-height: 210px;
+}

@@ -1,11 +1,23 @@
 import React, { useMemo, useState } from "react";
 import { api } from "../api/client";
 
+export const FREQUENCIES = [
+  { value: "monthly", label: "Monthly" },
+  { value: "weekly", label: "Weekly" },
+  { value: "bi-weekly", label: "Bi-weekly" },
+  { value: "yearly", label: "Yearly" },
+  { value: "one-time", label: "One-time" },
+];
+
+export function frequencyLabel(value) {
+  return FREQUENCIES.find(item => item.value === value)?.label || value || "Monthly";
+}
+
 function monthlyValue(amount, frequency) {
   const normalized = String(frequency || "monthly").toLowerCase().replace("-", "");
   const value = Number(amount || 0);
   if (normalized === "weekly") return value * 52 / 12;
-  if (normalized === "biweekly") return value * 26 / 12;
+  if (normalized === "biweekly") return value;
   if (normalized === "yearly") return value / 12;
   return value;
 }
@@ -15,28 +27,28 @@ function currency(value) {
 }
 
 export default function IncomeStreams({ income, refresh }) {
-  const [form, setForm] = useState({ name: "", amount: "", frequency: "monthly" });
+  const [form, setForm] = useState({ name: "", amount: "", frequency: "bi-weekly" });
   const [sortField, setSortField] = useState("amount");
   const [sortDirection, setSortDirection] = useState("desc");
   const [frequencyFilter, setFrequencyFilter] = useState("all");
   const [editingId, setEditingId] = useState(null);
-  const [editForm, setEditForm] = useState({ name: "", amount: "", frequency: "monthly" });
+  const [editForm, setEditForm] = useState({ name: "", amount: "", frequency: "bi-weekly" });
 
   async function addIncome(e) {
     e.preventDefault();
     await api.addIncome({ ...form, amount: Number(form.amount) });
-    setForm({ name: "", amount: "", frequency: "monthly" });
+    setForm({ name: "", amount: "", frequency: "bi-weekly" });
     refresh();
   }
 
   function startEdit(item) {
     setEditingId(item.id);
-    setEditForm({ name: item.name || "", amount: item.amount ?? "", frequency: item.frequency || "monthly" });
+    setEditForm({ name: item.name || "", amount: item.amount ?? "", frequency: item.frequency || "bi-weekly" });
   }
 
   function cancelEdit() {
     setEditingId(null);
-    setEditForm({ name: "", amount: "", frequency: "monthly" });
+    setEditForm({ name: "", amount: "", frequency: "bi-weekly" });
   }
 
   async function saveEdit(id) {
@@ -63,11 +75,11 @@ export default function IncomeStreams({ income, refresh }) {
   );
 
   return (
-    <section className="card">
+    <section className="card income-streams-card">
       <div className="list-header">
         <div>
           <h2>Income Streams</h2>
-          <p className="muted">Add income sources and filter by monthly, yearly, bi-weekly, weekly, or one-time income.</p>
+          <p className="muted">Add income sources and filter by Monthly, Yearly, Bi-weekly, Weekly, or One-time income.</p>
         </div>
         <div className="total-badge"><span>Current monthly income</span><strong>{currency(displayedMonthlyTotal)}</strong></div>
       </div>
@@ -75,11 +87,7 @@ export default function IncomeStreams({ income, refresh }) {
         <input placeholder="Income name" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} required />
         <input type="number" placeholder="Amount" value={form.amount} onChange={e => setForm({ ...form, amount: e.target.value })} required />
         <select value={form.frequency} onChange={e => setForm({ ...form, frequency: e.target.value })}>
-          <option value="monthly">monthly</option>
-          <option value="weekly">weekly</option>
-          <option value="biweekly">biweekly</option>
-          <option value="yearly">yearly</option>
-          <option value="one-time">one-time</option>
+          {FREQUENCIES.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}
         </select>
         <button>Add Income</button>
       </form>
@@ -87,11 +95,7 @@ export default function IncomeStreams({ income, refresh }) {
       <div className="filters">
         <select value={frequencyFilter} onChange={e => setFrequencyFilter(e.target.value)}>
           <option value="all">All frequencies</option>
-          <option value="monthly">Monthly only</option>
-          <option value="biweekly">Bi-weekly only</option>
-          <option value="yearly">Yearly only</option>
-          <option value="weekly">Weekly only</option>
-          <option value="one-time">One-time only</option>
+          {FREQUENCIES.map(option => <option key={option.value} value={option.value}>{option.label} only</option>)}
         </select>
         <select value={sortField} onChange={e => setSortField(e.target.value)}>
           <option value="amount">Sort by amount</option>
@@ -115,13 +119,9 @@ export default function IncomeStreams({ income, refresh }) {
                 <td>{isEditing ? <input type="number" value={editForm.amount} onChange={e => setEditForm({ ...editForm, amount: e.target.value })} /> : currency(item.amount)}</td>
                 <td>{isEditing ? (
                   <select value={editForm.frequency} onChange={e => setEditForm({ ...editForm, frequency: e.target.value })}>
-                    <option value="monthly">monthly</option>
-                    <option value="weekly">weekly</option>
-                    <option value="biweekly">biweekly</option>
-                    <option value="yearly">yearly</option>
-                    <option value="one-time">one-time</option>
+                    {FREQUENCIES.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}
                   </select>
-                ) : item.frequency}</td>
+                ) : frequencyLabel(item.frequency)}</td>
                 <td>
                   {isEditing ? (
                     <div className="action-buttons">

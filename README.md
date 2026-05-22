@@ -23,6 +23,7 @@ The app is designed around your current budget style: income, fixed expenses, no
   - WealthSimple: `$10,000`
 - Google Sheets import through CSV upload
 - Optional Google Sheets API sync
+- Monthly logs system with yearly tracking
 - SQLite database included for local use
 - FastAPI backend
 - Docker setup
@@ -284,6 +285,19 @@ ELSE:
 ```
 
 ---
+
+## Monthly Logs System
+
+The application includes a fully editable yearly financial ledger.
+
+### Features
+
+- January → December monthly tracking
+- Dynamic year selection
+- Editable monthly income and expense entries
+- Automatic monthly balance calculations
+- Synchronization with Income and Expense tabs
+- Real-time totals generation
 
 ## Important Note
 

@@ -7,6 +7,7 @@ import Goals from "./components/Goals";
 import AllocationCards from "./components/AllocationCards";
 import GoogleSheetsImport from "./components/GoogleSheetsImport";
 import TaxPlanner from "./components/TaxPlanner";
+import MonthlyLogs from "./components/MonthlyLogs";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -38,6 +39,27 @@ export default function App() {
     refresh();
   }, []);
 
+  useEffect(() => {
+    async function resetNonFixedExpensesForMonth() {
+      if (!expenses.length) return;
+      const monthKey = new Date().toISOString().slice(0, 7);
+      const storageKey = `nonFixedExpenseReset:${monthKey}`;
+      if (localStorage.getItem(storageKey)) return;
+
+      const nonFixed = expenses.filter(expense => expense.category === "Non-Fixed Expenses" && Number(expense.amount || 0) !== 0);
+      if (!nonFixed.length) {
+        localStorage.setItem(storageKey, "true");
+        return;
+      }
+
+      await Promise.all(nonFixed.map(expense => api.updateExpense(expense.id, { ...expense, amount: 0 })));
+      localStorage.setItem(storageKey, "true");
+      refresh();
+    }
+
+    resetNonFixedExpensesForMonth().catch(err => setError(err.message));
+  }, [expenses]);
+
   const tabs = [
     ["dashboard", "Dashboard"],
     ["income", "Income"],
@@ -46,6 +68,7 @@ export default function App() {
     ["allocator", "Allocator"],
     ["sheets", "Google Sheets"],
     ["tax", "Tax Planner"],
+    ["logs", "Monthly Logs"],
   ];
 
   return (
@@ -74,7 +97,8 @@ export default function App() {
       {activeTab === "goals" && <Goals assets={assets} refresh={refresh} />}
       {activeTab === "allocator" && <AllocationCards summary={summary} />}
       {activeTab === "sheets" && <GoogleSheetsImport refresh={refresh} />}
-      {activeTab === "tax" && <TaxPlanner />}
+      {activeTab === "tax" && <TaxPlanner expenses={expenses} />}
+      {activeTab === "logs" && <MonthlyLogs income={income} expenses={expenses} refresh={refresh} />}
     </div>
   );
 }
