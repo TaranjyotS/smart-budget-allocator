@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     app_name: str = "Smart Budget Allocator"
     environment: str = "development"
     database_url: str = "sqlite:///./smart_budget.db"
-    cors_origins: str = "http://localhost:5173,http://127.0.0.1:5173"  # Use CORS_ORIGINS=* for quick deployment, or set your Vercel URL in production.
+    cors_origins: str = "http://localhost:5173, http://127.0.0.1:5173, https://smart-budget-allocator.vercel.app"  # Use CORS_ORIGINS=* for quick deployment, or set your Vercel URL in production.
 
     google_sheets_enabled: bool = False
     google_service_account_file: str = "./google_service_account.json"
