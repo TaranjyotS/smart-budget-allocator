@@ -200,9 +200,10 @@ export default function Expenses({ expenses, refresh }) {
         </select>
       </div>
 
-      <table>
-        <thead><tr><th>Name</th><th>Category</th><th>Amount</th><th>Frequency</th><th>Due</th><th>Notes</th><th>Actions</th></tr></thead>
-        <tbody>
+      <div className="table-wrap expense-table-wrap">
+        <table className="expense-table">
+          <thead><tr><th>Name</th><th>Category</th><th>Amount</th><th>Frequency</th><th>Due</th><th>Notes</th><th>Actions</th></tr></thead>
+          <tbody>
           {visibleExpenses.map(item => {
             const isEditing = editingId === item.id;
             return (
@@ -237,8 +238,9 @@ export default function Expenses({ expenses, refresh }) {
               </tr>
             );
           })}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </section>
   );
 }
