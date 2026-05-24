@@ -1,82 +1,157 @@
-# Smart Budget Tracker & Asset Allocator
+<div align="center">
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Frontend-React-blue?style=for-the-badge&logo=react" />
-  <img src="https://img.shields.io/badge/Backend-FastAPI-green?style=for-the-badge&logo=fastapi" />
-  <img src="https://img.shields.io/badge/Database-SQLite-lightgrey?style=for-the-badge&logo=sqlite" />
-  <img src="https://img.shields.io/badge/Containerized-Docker-blue?style=for-the-badge&logo=docker" />
-  <img src="https://img.shields.io/badge/Hosting-Vercel-black?style=for-the-badge&logo=vercel" />
-  <img src="https://img.shields.io/badge/Backend-Render-purple?style=for-the-badge" />
+# 💰 Smart Budget Tracker & Asset Allocator
+
+### Production-ready full-stack personal finance platform for budgeting, smart allocation, tax planning, and financial goal tracking.
+
+<p>
+  <img src="https://img.shields.io/badge/_FRONTEND-React-61DAFB?style=for-the-badge&labelColor=555555&logo=react&logoColor=white" />
+  <img src="https://img.shields.io/badge/_BACKEND-FastAPI-009688?style=for-the-badge&labelColor=555555&logo=fastapi&logoColor=white" />
+  <img src="https://img.shields.io/badge/_DATABASE-SQLite-003B57?style=for-the-badge&labelColor=555555&logo=sqlite&logoColor=white" />
 </p>
 
-<p align="center">
-  A production-ready full-stack personal finance, budgeting, and smart asset allocation platform.
+<p>
+  <img src="https://img.shields.io/badge/_CONTAINERIZED-Docker-2496ED?style=for-the-badge&labelColor=555555&logo=docker&logoColor=white" />
+  <img src="https://img.shields.io/badge/_DEPLOYMENT-Vercel-000000?style=for-the-badge&labelColor=555555&logo=vercel&logoColor=white" />
+  <img src="https://img.shields.io/badge/S_BACKEND_HOSTING-Render-7B3FE4?style=for-the-badge&labelColor=555555" />
 </p>
+
+<p>
+  <a href="#-overview">Overview</a> •
+  <a href="#-features">Features</a> •
+  <a href="#-screenshots">Screenshots</a> •
+  <a href="#-tech-stack">Tech Stack</a> •
+  <a href="#-architecture">Architecture</a> •
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-deployment">Deployment</a>
+</p>
+
+</div>
 
 ---
 
-# Live Demo
+## 📌 Overview
 
-|                   Frontend                |                   Backend API Docs               |
+**Smart Budget Tracker & Asset Allocator** is a production-ready personal finance platform that helps users manage income streams, expenses, savings goals, tax planning, and smart asset allocation through a responsive full-stack dashboard.
+
+The project combines a modern React/Vite frontend, FastAPI backend architecture, dynamic financial allocation logic, Google Sheets integration, responsive mobile-first UI, and Dockerized deployment workflows.
+
+It is designed as a **portfolio-grade engineering project** demonstrating full-stack development, REST API architecture, responsive UI engineering, deployment pipelines, financial logic systems, and production-ready project organization.
+
+---
+
+## 🌐 Live Demo
+
+<div align="center">
+
+|                    Frontend               |                  Backend API Docs                |
 |-------------------------------------------|--------------------------------------------------|
 | https://smart-budget-allocator.vercel.app | https://smart-budget-allocator.onrender.com/docs |
 
----
-
-# Overview
-
-A full-stack budget tracking and smart salary allocation system that supports:
-
-|     Frontend    |         Backend      |
-|-----------------|----------------------|
-| React + Vite UI | FastAPI + SQLite API |
-
-The platform helps users:
-
-- track income streams
-- manage fixed and non-fixed expenses
-- monitor savings and investment goals
-- estimate taxes
-- manage yearly financial logs
-- import Google Sheets data
-- visualize financial progress across devices
+</div>
 
 ---
 
-# Tech Stack
+## ✨ Features
 
-| Frontend         | Backend        | DevOps & Integrations |
-|------------------|----------------|-----------------------|
-| ⚛️ React         | ⚡ FastAPI     | 🐳 Docker             |
-| ⚡ Vite          | 🗄️ SQLite      | ▲ Vercel              |
-| 🎨 CSS3          | 📦 SQLAlchemy  | 🚀 Render             |
-| 📱 Responsive UI | ✅ Pydantic    | 📊 Google Sheets      |
+<table>
+<tr>
 
----
+<td width="33%" valign="top">
 
-# Key Features
+### 💳 Budgeting
 
-- Interactive React dashboard
-- Smart asset allocation engine
-- Flexible income streams
-- Flexible expense categories
-- Monthly and yearly financial tracking
-- Google Sheets CSV import
-- Optional Google Sheets API integration
-- Goal tracking system
-- Dynamic yearly logs
-- Responsive mobile support
-- Real-time allocation calculations
-- Deployment-ready architecture
+- Multiple income streams
+- Fixed & non-fixed expenses
+- Monthly/yearly tracking
 - Expense threshold warnings
-- Responsive navigation system
-- Mobile table scrolling support
 - Dynamic budgeting workflows
 - Editable financial logs
 
+</td>
+
+<td width="33%" valign="top">
+
+### 📈 Financial Planning
+
+- Smart allocation engine
+- Savings goal tracking
+- Investment target planning
+- Tax planning workflows
+- Goal progress monitoring
+- Timeline estimations
+
+</td>
+
+<td width="33%" valign="top">
+
+### 🚀 Engineering
+
+- FastAPI REST APIs
+- Responsive React dashboard
+- Mobile table scrolling
+- Dockerized architecture
+- Vercel + Render deployment
+- Google Sheets integration
+
+</td>
+
+</tr>
+</table>
+
 ---
 
-# Screenshots
+## 🧱 Tech Stack
+
+<div align="center">
+
+<table>
+<tr>
+<td align="center" width="33%">
+<img src="https://skillicons.dev/icons?i=react,vite,css" height="48"/><br/>
+<b>Frontend</b><br/>
+React • Vite • CSS3
+</td>
+
+<td align="center" width="33%">
+<img src="https://skillicons.dev/icons?i=python,fastapi,sqlite" height="48"/><br/>
+<b>Backend</b><br/>
+FastAPI • SQLite • SQLAlchemy
+</td>
+
+<td align="center" width="33%">
+<img src="https://skillicons.dev/icons?i=docker,git,github" height="48"/><br/>
+<b>DevOps</b><br/>
+Docker • Git • GitHub
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<img src="https://skillicons.dev/icons?i=vercel" width="48"/><br/>
+<b>Frontend Hosting</b><br/>
+Vercel
+</td>
+
+<td align="center">
+<img src="https://img.shields.io/badge/Render-Backend_Hosting-7B3FE4?style=for-the-badge" /><br/>
+<b>Backend Hosting</b><br/>
+Render
+</td>
+
+<td align="center">
+<img src="https://skillicons.dev/icons?i=googlecloud" width="48"/><br/>
+<b>Integrations</b><br/>
+Google Sheets API
+</td>
+</tr>
+</table>
+
+</div>
+
+---
+
+## 📸 Screenshots
 
 <p align="center">
   <img src="docs/screenshots/Dashboard.png" width="45%"/>
@@ -84,52 +159,63 @@ The platform helps users:
   <img src="docs/screenshots/Logs.png" width="45%"/>
 </p>
 
----
+## 🎯 Current Financial Targets
 
-# Current Financial Targets
+<div align="center">
 
 |    Account   | Current | Target |
 |--------------|---------|--------|
-| Chequing     |   1100  |   5000 |
-| Savings      |    400  |  20000 |
+|   Chequing   |   1100  |   5000 |
+|   Savings    |    400  |  20000 |
 | WealthSimple |    500  |  10000 |
+
+</div>
 
 Monthly Income: `3600`
 
 ---
 
-# Architecture Overview
+## 🏗️ Architecture
 
-```text
-Frontend (React/Vite)
-        ↓
-FastAPI REST API
-        ↓
-SQLite Database
-        ↓
-Allocation Engine
-        ↓
-Goal & Budget Calculations
+```mermaid
+flowchart TD
+    A[React + Vite Frontend] --> B[FastAPI REST API]
+    B --> C[SQLite Database]
+    B --> D[Allocation Engine]
+    B --> E[Tax Planner]
+    B --> F[Goal Tracking Engine]
+    B --> G[Google Sheets Import]
 ```
 
----
+### System Flow
 
-# Production Features
-
-- Mobile responsive UI
-- RESTful API architecture
-- Dockerized frontend/backend services
-- Dynamic yearly financial logs
-- Real-time allocation calculations
-- Responsive horizontal table scrolling
-- Automatic expense threshold warnings
-- Deployment-ready Vercel + Render setup
-- CORS-safe deployment configuration
-- Environment-based configuration management
+| Step |                        Description                      |
+|------|---------------------------------------------------------|
+|  1   | User enters income, expenses, goals, and financial data |
+|  2   | Frontend sends requests to FastAPI APIs                 |
+|  3   | Backend validates and stores financial data             |
+|  4   | Allocation engine computes savings and goal progress    |
+|  5   | Dashboard visualizes financial insights                 |
+|  6   | Logs and goals persist across sessions                  |
 
 ---
 
-# Project Structure
+## 🧠 Engineering Highlights
+
+|          Area        |                        Highlights                   |
+|----------------------|-----------------------------------------------------|
+| Frontend Engineering | Responsive React/Vite dashboard with mobile support |
+| Backend Engineering  | Modular FastAPI REST architecture                   |
+| Financial Logic      | Dynamic smart allocation engine                     |
+| Mobile Optimization  | Horizontal table scrolling and adaptive layouts     |
+| Deployment           | Vercel frontend and Render backend                  |
+| DevOps               | Dockerized deployment workflows                     |
+| UX Engineering       | Touch-friendly responsive finance workflows         |
+| Integrations         | Google Sheets CSV/API synchronization               |
+
+---
+
+## 📁 Project Structure
 
 ```text
 smart-budget-allocator/
@@ -143,6 +229,7 @@ smart-budget-allocator/
 │   ├── tests/
 │   ├── requirements.txt
 │   └── Dockerfile
+│
 ├── frontend/
 │   ├── src/
 │   │   ├── api/
@@ -151,51 +238,28 @@ smart-budget-allocator/
 │   │   ├── main.jsx
 │   │   └── styles.css
 │   ├── package.json
-│   ├── index.html
 │   └── Dockerfile
-├── google-sheets/
+│
 ├── docs/
 │   ├── screenshots/
 │   ├── ARCHITECTURE.md
+│   ├── DEPLOYMENT.md
 │   ├── GOOGLE_SHEETS_SETUP.md
 │   └── USER_GUIDE.md
+│
+├── google-sheets/
+├── scripts/
 ├── docker-compose.yml
+├── render.yaml
 ├── .env.example
-├── .gitignore
 └── README.md
 ```
 
 ---
 
-# One-Click Local Startup
+## ⚡ Quick Start
 
-Run:
-
-```text
-start-app.bat
-```
-
-This automatically:
-
-- creates backend virtual environment
-- installs backend requirements
-- installs frontend dependencies
-- starts FastAPI
-- starts React/Vite
-- opens browser automatically
-- enables same-network mobile access
-
-To stop local servers:
-
-```text
-stop-app.bat
-```
-
----
-
-# Quick Start
-
-## Backend
+### Backend
 
 ```bash
 cd backend
@@ -204,17 +268,7 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload --port 8000
 ```
 
-Windows PowerShell:
-
-```powershell
-cd backend
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
-```
-
-Backend URL:
+Backend:
 
 ```text
 http://localhost:8000
@@ -228,7 +282,7 @@ http://localhost:8000/docs
 
 ---
 
-## Frontend
+### Frontend
 
 ```bash
 cd frontend
@@ -236,7 +290,7 @@ npm install
 npm run dev
 ```
 
-Frontend URL:
+Frontend:
 
 ```text
 http://localhost:5173
@@ -244,7 +298,7 @@ http://localhost:5173
 
 ---
 
-## Docker
+### Docker
 
 ```bash
 docker compose up --build
@@ -252,28 +306,41 @@ docker compose up --build
 
 ---
 
-# Google Sheets Support
+## 🧾 Google Sheets Support
 
-## CSV Import
+<table>
+<tr>
 
-1. Open Google Sheets
-2. Download as CSV
-3. Upload into application
-4. Backend parses and stores data
+<td width="50%" valign="top">
 
-## Google Sheets API Sync
+### 📥 CSV Import
 
-Supports live integration using:
+- Export Google Sheets as CSV
+- Upload directly into application
+- Backend parses financial data
+- Automatic synchronization
 
-- Google Cloud Project
-- Google Sheets API
-- Service Accounts
+</td>
 
-See: [Google Sheets Setup](docs/GOOGLE_SHEETS_SETUP.md)
+<td width="50%" valign="top">
+
+### 🔗 Google Sheets API
+
+- Google Cloud integration
+- Service account authentication
+- Live synchronization workflows
+- Multi-sheet support
+
+</td>
+
+</tr>
+</table>
+
+See: [`docs/GOOGLE_SHEETS_SETUP.md`](docs/GOOGLE_SHEETS_SETUP.md)
 
 ---
 
-# Smart Allocation Logic
+## 🧮 Smart Allocation Logic
 
 The backend calculates:
 
@@ -297,21 +364,20 @@ ELSE:
 
 ---
 
-# Monthly Logs System
+## 📒 Monthly Logs System
 
-Features:
-
-- January → December tracking
-- Dynamic year selection (2020–2050)
-- Editable income and expense entries
-- Automatic balance calculations
-- Real-time synchronization
-- Yearly financial history
-- Responsive yearly ledger view
+|     Capability     |                      Description                     |
+|--------------------|------------------------------------------------------|
+| Yearly logs        | January to December tracking                         |
+| Year selector      | Dynamic selection from 2020 to 2050                  |
+| Editable cells     | Income and expense entries can be updated            |
+| Auto totals        | Monthly income, expenses, and balance are calculated |
+| Current month sync | Ongoing month updates reflect across related tabs    |
+| Responsive view    | Horizontal scrolling for mobile screens              |
 
 ---
 
-# Mobile Support
+## 📱 Mobile Support
 
 The application is optimized for:
 
@@ -320,57 +386,92 @@ The application is optimized for:
 - tablets
 - desktop browsers
 
-Features include:
+Mobile features include:
 
-- responsive layouts
 - horizontal table scrolling
+- responsive layouts
 - adaptive spacing
-- touch-friendly controls
-- responsive navigation tabs
+- touch-friendly navigation
+- scrollable financial tables
+- mobile-first dashboard workflows
 
 ---
 
-# Deployment
+## 🚀 Deployment
 
-Recommended setup:
+<div align="center">
 
-| Frontend |         Backend        |       Database      |
-|----------|------------------------|---------------------|
-|  Vercel  | Render / Railway / AWS | SQLite / PostgreSQL |
+|        Layer       |   Platform   |
+|--------------------|--------------|
+| Frontend           | Vercel       |
+| Backend            | Render       |
+| Database           | SQLite       |
+| Containers         | Docker       |
+| Environment Config | `.env` files |
 
-Deployment files included:
+</div>
+
+### Deployment Files Included
 
 ```text
 frontend/vercel.json
 frontend/.env.production.example
 frontend/.env.local.example
-render.yaml
 backend/start.sh
+render.yaml
+docker-compose.yml
 docs/DEPLOYMENT.md
 ```
 
 ---
 
-# Future Improvements
+## 🛠️ One-Click Startup Scripts
 
-- PostgreSQL migration
-- JWT authentication
-- Multi-user support
-- AI-powered financial insights
-- Financial forecasting engine
-- Investment analytics dashboard
-- Email reminders
-- Automated recurring imports
-- Cloud synchronization
+Run:
+
+```text
+start-app.bat
+```
+
+This automatically:
+
+- creates backend virtual environment
+- installs dependencies
+- launches backend/frontend
+- opens browser automatically
+- enables same-network mobile access
+
+Stop local servers:
+
+```text
+stop-app.bat
+```
 
 ---
 
-# Disclaimer
+## 🔮 Future Improvements
 
-This project is a budgeting and planning tool and does not provide legal, financial, tax, or investment advice.
+| Priority |           Improvement          |
+|----------|--------------------------------|
+| High     | JWT authentication             |
+| High     | PostgreSQL migration           |
+| Medium   | AI-powered financial insights  |
+| Medium   | Investment analytics dashboard |
+| Medium   | Cloud synchronization          |
+| Low      | Email reminders                |
+| Low      | Financial forecasting          |
+| Low      | Multi-user collaboration       |
 
 ---
 
-# License
+## 📄 License
 
 MIT License
+
+---
+
+## ⚠️ Disclaimer
+
+This project is intended for budgeting, financial organization, and planning purposes only.
+
+It does not provide legal, tax, financial, or investment advice.
