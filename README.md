@@ -269,9 +269,7 @@ Supports live integration using:
 - Google Sheets API
 - Service Accounts
 
-See:
-
-[Google Sheets Setup](docs/GOOGLE_SHEETS_SETUP.md)
+See: [Google Sheets Setup](docs/GOOGLE_SHEETS_SETUP.md)
 
 ---
 

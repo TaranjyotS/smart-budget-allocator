@@ -41,7 +41,6 @@ backend-install.log
 npm-debug.log*
 yarn-debug.log*
 pnpm-debug.log*
-*/screenshots/*
 
 # OS / editor
 .DS_Store
