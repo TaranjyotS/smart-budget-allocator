@@ -154,9 +154,9 @@ Google Sheets API
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="docs/screenshots/Dashboard.png" width="45%"/>
-  <img src="docs/screenshots/Expenses.png" width="45%"/>
-  <img src="docs/screenshots/Logs.png" width="45%"/>
+  <img src="docs/screenshots/dashboard.png" width="45%"/>
+  <img src="docs/screenshots/expenses.png" width="45%"/>
+  <img src="docs/screenshots/logs.png" width="45%"/>
 </p>
 
 ## 🎯 Current Financial Targets
@@ -177,6 +177,8 @@ Monthly Income: `3600`
 
 ## 🏗️ Architecture
 
+<div align="center">
+
 ```mermaid
 flowchart TD
     A[React + Vite Frontend] --> B[FastAPI REST API]
@@ -185,6 +187,32 @@ flowchart TD
     B --> E[Tax Planner]
     B --> F[Goal Tracking Engine]
     B --> G[Google Sheets Import]
+```
+
+</div>
+
+### 🔄 End-to-End Workflow
+
+```text
+User Enters Financial Data
+        ↓
+React Dashboard Captures Inputs
+        ↓
+FastAPI Backend Validates Request
+        ↓
+SQLite Stores Income, Expenses, Goals, and Logs
+        ↓
+Allocation Engine Calculates Surplus, Gaps, and Priorities
+        ↓
+Tax Planner Estimates Tax Impact
+        ↓
+Goal Tracker Computes Progress and Timelines
+        ↓
+Dashboard Displays Charts, Logs, Warnings, and Recommendations
+        ↓
+Optional Google Sheets Import/Sync Updates Financial Records
+        ↓
+User Reviews Monthly Logs and Adjusts Budget Strategy
 ```
 
 ### System Flow
@@ -215,7 +243,8 @@ flowchart TD
 
 ---
 
-## 📁 Project Structure
+<details>
+<summary><strong>📁 Folder Structure</strong></summary>
 
 ```text
 smart-budget-allocator/
@@ -254,6 +283,8 @@ smart-budget-allocator/
 ├── .env.example
 └── README.md
 ```
+
+</details>
 
 ---
 
