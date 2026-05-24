@@ -79,8 +79,8 @@ The platform helps users:
 # Screenshots
 
 <p align="center">
-  <img src="docs/screenshots/dashboard.png" width="45%"/>
-  <img src="docs/screenshots/expenses.png" width="45%"/>
+  <img src="docs/screenshots/Dashboard.png" width="45%"/>
+  <img src="docs/screenshots/Expenses.png" width="45%"/>
   <img src="docs/screenshots/Logs.png" width="45%"/>
 </p>
 
